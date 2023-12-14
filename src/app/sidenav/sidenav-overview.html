@@ -1,0 +1,22 @@
+<mat-accordion class="sideNav-panel">
+  <mat-expansion-panel *ngFor="let section of sections; let i = index">
+    <mat-expansion-panel-header (click)="onSectionClick(section)">
+      <mat-panel-title>
+        <span class="count">{{ i + 1 }}</span>
+        <span>{{ section.section }}</span>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <mat-list *ngFor="let subsection of section.subsections">
+      <mat-list-item
+        [ngClass]="{ 'selected': selectedSubsection === subsection }"
+        (click)="onSubsectionClick(subsection)"
+      >
+        {{ subsection.name }}
+        <span class="fieldCount"
+          >({{ subsection.filledMandatoryFieldsCount$ | async }} out of {{
+          subsection.totalMandatoryFieldsCount$ | async }})</span
+        >
+      </mat-list-item>
+    </mat-list>
+  </mat-expansion-panel>
+</mat-accordion>
